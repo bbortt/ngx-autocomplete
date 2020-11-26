@@ -111,21 +111,6 @@
             "browserTarget": "ngx-autocomplete-samples:build"
           }
         },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/ngx-autocomplete-samples/src/test.ts",
-            "polyfills": "projects/ngx-autocomplete-samples/src/polyfills.ts",
-            "tsConfig": "projects/ngx-autocomplete-samples/tsconfig.spec.json",
-            "karmaConfig": "projects/ngx-autocomplete-samples/karma.conf.js",
-            "assets": [
-              "projects/ngx-autocomplete-samples/src/favicon.ico",
-              "projects/ngx-autocomplete-samples/src/assets"
-            ],
-            "styles": ["projects/ngx-autocomplete-samples/src/styles.css"],
-            "scripts": []
-          }
-        },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
@@ -135,18 +120,6 @@
               "projects/ngx-autocomplete-samples/e2e/tsconfig.json"
             ],
             "exclude": ["**/node_modules/**"]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "projects/ngx-autocomplete-samples/e2e/protractor.conf.js",
-            "devServerTarget": "ngx-autocomplete-samples:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "ngx-autocomplete-samples:serve:production"
-            }
           }
         }
       }

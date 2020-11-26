@@ -16,8 +16,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "prebuild": "copyfiles README.md projects/bbortt/ngx-autocomplete",
     "build": "ng build --prod",
-    "test": "ng test",
+    "test": "ng test --browsers=ChromeHeadless --watch=false",
+    "test:watch": "ng test --browsers=ChromeHeadless",
     "lint": "ng lint"
   },
   "private": true,
@@ -42,6 +44,7 @@
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
+    "copyfiles": "^2.4.0",
     "husky": "^4.3.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
@@ -54,6 +57,7 @@
     "prettier": "^2.2.0",
     "pretty-quick": "^3.1.0",
     "protractor": "~7.0.0",
+    "puppeteer": "^5.5.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "tslint-config-prettier": "^1.18.0",
