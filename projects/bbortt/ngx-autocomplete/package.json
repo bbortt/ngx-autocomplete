@@ -1,0 +1,25 @@
+{
+  "name": "@bbortt/ngx-autocomplete",
+  "version": "0.0.1",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Timon Borter",
+    "url": "https://bbortt.github.io"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bbortt/ngx-autocomplete.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bbortt/ngx-autocomplete/issues"
+  },
+  "peerDependencies": {
+    "@angular/common": "^11.0.0",
+    "@angular/core": "^11.0.0",
+    "@angular/forms": "^11.0.0",
+    "rxjs": "^6.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  }
+}

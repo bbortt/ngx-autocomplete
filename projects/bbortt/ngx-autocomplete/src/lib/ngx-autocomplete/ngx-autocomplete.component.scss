@@ -1,0 +1,10 @@
+.ngx-autocomplete-container {
+  z-index: 1;
+  position: absolute;
+  background-color: white;
+
+  .ngx-autocomplete-option {
+    cursor: pointer;
+    border: 1px solid black;
+  }
+}
