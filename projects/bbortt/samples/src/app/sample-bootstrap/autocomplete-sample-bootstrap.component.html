@@ -1,5 +1,11 @@
-<form name="editForm" role="form" novalidate [formGroup]="editForm">
-  <div>
+<form
+  name="editForm"
+  role="form"
+  id="autocomplete-sample-bootstrap"
+  novalidate
+  [formGroup]="editForm"
+>
+  <div class="form-group">
     <label for="field-country"> Name </label>
 
     <ngx-autocomplete
@@ -16,16 +22,19 @@
         (editForm.get('country')!.dirty || editForm.get('country')!.touched)
       "
     >
-      <small *ngIf="editForm.get('country')?.errors?.required">
+      <small
+        *ngIf="editForm.get('country')?.errors?.required"
+        class="form-text text-danger"
+      >
         This field is required.
       </small>
     </div>
   </div>
 
-  <button type="submit">Submit</button>
+  <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
 <div>
-  <h2>Value&nbsp;</h2>
+  <h3>Value&nbsp;</h3>
   <span>{{ editForm.get('country')!.value }}</span>
 </div>

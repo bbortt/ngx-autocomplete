@@ -16,6 +16,12 @@ Run `yarn build --watch` in the same directory to watch and build a bundle on fi
 
 Run `ng build` to build the project in production mode. The build artifacts will be stored in the `dist/` directory.
 
+### Github Pages
+
+Github Pages deployment happens via [`angular-cli-ghpages`](https://www.npmjs.com/package/angular-cli-ghpages).
+The command `npm run deploy:pages` will build and push the sample application (`projects/bbortt/samples`)
+to the corresponding `gh-pages` branch.
+
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).

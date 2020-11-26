@@ -36,40 +36,48 @@
               "projects/bbortt/ngx-autocomplete/tsconfig.lib.json",
               "projects/bbortt/ngx-autocomplete/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
     },
-    "ngx-autocomplete-samples": {
+    "@bbortt/samples": {
       "projectType": "application",
-      "schematics": {},
-      "root": "projects/ngx-autocomplete-samples",
-      "sourceRoot": "projects/ngx-autocomplete-samples/src",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/bbortt/samples",
+      "sourceRoot": "projects/bbortt/samples/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ngx-autocomplete-samples",
-            "index": "projects/ngx-autocomplete-samples/src/index.html",
-            "main": "projects/ngx-autocomplete-samples/src/main.ts",
-            "polyfills": "projects/ngx-autocomplete-samples/src/polyfills.ts",
-            "tsConfig": "projects/ngx-autocomplete-samples/tsconfig.app.json",
+            "outputPath": "dist/bbortt/samples",
+            "index": "projects/bbortt/samples/src/index.html",
+            "main": "projects/bbortt/samples/src/main.ts",
+            "polyfills": "projects/bbortt/samples/src/polyfills.ts",
+            "tsConfig": "projects/bbortt/samples/tsconfig.app.json",
             "aot": true,
             "assets": [
-              "projects/ngx-autocomplete-samples/src/favicon.ico",
-              "projects/ngx-autocomplete-samples/src/assets"
+              "projects/bbortt/samples/src/favicon.ico",
+              "projects/bbortt/samples/src/assets"
             ],
-            "styles": ["projects/ngx-autocomplete-samples/src/styles.css"],
+            "styles": [
+              "projects/bbortt/samples/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "projects/ngx-autocomplete-samples/src/environments/environment.ts",
-                  "with": "projects/ngx-autocomplete-samples/src/environments/environment.prod.ts"
+                  "replace": "projects/bbortt/samples/src/environments/environment.ts",
+                  "with": "projects/bbortt/samples/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -87,8 +95,7 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
+                  "maximumWarning": "10kb"
                 }
               ]
             }
@@ -97,29 +104,36 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ngx-autocomplete-samples:build"
+            "browserTarget": "@bbortt/samples:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ngx-autocomplete-samples:build:production"
+              "browserTarget": "@bbortt/samples:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngx-autocomplete-samples:build"
+            "browserTarget": "@bbortt/samples:build"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/ngx-autocomplete-samples/tsconfig.app.json",
-              "projects/ngx-autocomplete-samples/tsconfig.spec.json",
-              "projects/ngx-autocomplete-samples/e2e/tsconfig.json"
+              "projects/bbortt/samples/tsconfig.app.json",
+              "projects/bbortt/samples/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "/ngx-autocomplete/"
           }
         }
       }

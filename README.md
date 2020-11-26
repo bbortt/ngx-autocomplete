@@ -1,6 +1,10 @@
 # @bbortt/ngx-autocomplete
 
-Angular V11 compatible autocomplete component to use with any style framework.
+> Angular V11 compatible autocomplete component to use with any style framework.
+
+[![Travis CI](https://travis-ci.com/bbortt/ngx-autocomplete.svg?branch=release)](https://travis-ci.com/bbortt/ngx-autocomplete)
+[![Blazing Fast](https://img.shields.io/badge/speed-blazing%20%F0%9F%94%A5-brightgreen.svg?style=flat-square)](https://twitter.com/acdlite/status/974390255393505280)
+[![License: Apache 2](https://img.shields.io/badge/License-Apache2-blue.svg)](https://opensource.org/licenses/MIT)
 
 - [Getting Started](#getting-started)
 - [API Reference](#api-reference)
@@ -101,19 +105,19 @@ export class AutocompleteSampleComponent implements OnInit {
 ></ngx-autocomplete>
 ```
 
-[Source](https://github.com/bbortt/ngx-autocomplete/tree/release/projects/ngx-autocomplete-samples/src/app/sample).
+[Source](https://github.com/bbortt/ngx-autocomplete/tree/release/projects/bbortt/samples/src/app/sample).
 
 ## Advanced
 
 The advanced sample uses complex objects and the `name` property as an accessor.
 Take a look at the code in
-[`projects/ngx-autocomplete-samples/src/app/sample-advanced`](https://github.com/bbortt/ngx-autocomplete/tree/release/projects/ngx-autocomplete-samples/src/app/sample-advanced).
+[`projects/bbortt/samples/src/app/sample-advanced`](https://github.com/bbortt/ngx-autocomplete/tree/release/projects/bbortt/samples/src/app/sample-advanced).
 
 ## Bootstrap
 
 The bootstrap sample lives up to its name. Using a custom `.scss` styling, it extends the Bootstrap form styles.
 Take a look at the code in
-[`projects/ngx-autocomplete-samples/src/app/sample-bootstrap`](https://github.com/bbortt/ngx-autocomplete/tree/release/projects/ngx-autocomplete-samples/src/app/sample-bootstrap).
+[`projects/bbortt/samples/src/app/sample-bootstrap`](https://github.com/bbortt/ngx-autocomplete/tree/release/projects/bbortt/samples/src/app/sample-bootstrap).
 
 # License
 
