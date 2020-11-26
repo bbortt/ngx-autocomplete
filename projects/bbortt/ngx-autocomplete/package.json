@@ -2,6 +2,9 @@
   "name": "@bbortt/ngx-autocomplete",
   "version": "11.0.0",
   "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "author": {
     "name": "Timon Borter",
     "url": "https://bbortt.github.io"

@@ -22,7 +22,7 @@
     "test:watch": "ng test --browsers=ChromeHeadless",
     "lint": "ng lint",
     "lint:fix": "npm run lint -- --fix",
-    "deploy": "npm deploy dist/bbortt/ngx-autocomplete",
+    "deploy": "npm publish dist/bbortt/ngx-autocomplete",
     "deploy:pages": "ng deploy @bbortt/samples"
   },
   "private": true,
