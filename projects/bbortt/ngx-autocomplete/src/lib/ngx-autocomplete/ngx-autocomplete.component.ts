@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -16,7 +15,6 @@ import {
 } from '@angular/forms';
 
 import { debounceTime, startWith } from 'rxjs/operators';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'ngx-autocomplete',
@@ -31,7 +29,7 @@ import { Subject } from 'rxjs';
   ]
 })
 export class NgxAutocompleteComponent<T>
-  implements ControlValueAccessor, OnInit, AfterViewInit {
+  implements ControlValueAccessor, OnInit {
   // Control values for ElementRef<HtmlInputElement>
   @Input()
   id?: string;
@@ -76,10 +74,6 @@ export class NgxAutocompleteComponent<T>
       .subscribe((value: string) => this.autocompleteChanges.next(value));
   }
 
-  ngAfterViewInit(): void {
-    this.onWindowResize();
-  }
-
   registerOnChange(onChange: (update: T) => void): void {
     this.onChange = onChange;
   }
@@ -107,14 +101,15 @@ export class NgxAutocompleteComponent<T>
   }
 
   onFocus(): void {
+    this.onWindowResize();
     this.onTouched();
     this.isFocused = true;
   }
 
   selectOption(option: T): void {
+    this.onChange(option);
     this.autocompleteControl.setValue(this.optionPropertyAccessor(option));
     this.isFocused = false;
-    this.onChange(option);
   }
 
   public optionPropertyAccessor(option: T): string {

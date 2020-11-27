@@ -1,10 +1,19 @@
-# @bbortt/ngx-autocomplete
+@bbortt/ngx-autocomplete
+===
 
 > Angular V11 compatible autocomplete component to use with any style framework.
 
 [![Travis CI](https://travis-ci.com/bbortt/ngx-autocomplete.svg?branch=release)](https://travis-ci.com/bbortt/ngx-autocomplete)
 [![Blazing Fast](https://img.shields.io/badge/speed-blazing%20%F0%9F%94%A5-brightgreen.svg?style=flat-square)](https://twitter.com/acdlite/status/974390255393505280)
 [![License: Apache 2](https://img.shields.io/badge/License-Apache2-blue.svg)](https://opensource.org/licenses/MIT)
+
+##_Highlights_:
+
+* Fits perfectly into the `@angular/forms` / `FormGroup` setup
+* Create your own filter method which matches your case best
+* Fully flexible for any autocomplete object through `propertyAccessor` function
+* Customizable styling using css classes
+* Scales nicely to every screen size
 
 [>> Life Samples](https://bbortt.github.io/ngx-autocomplete).
 
@@ -14,6 +23,7 @@
 - [API Reference](#api-reference)
   - [Inputs](#inputs)
   - [Outputs](#outputs)
+  - [Css Classes](#css-classes)
 - [Examples](#examples)
   - [Simple](#simple)
   - [Advanced](#advanced)
@@ -57,6 +67,14 @@ That's it. You can head into the code at this point! The component selector is n
 |         Input         |          Type          | Description                                                                                                                                  |
 | :-------------------: | :--------------------: | :------------------------------------------------------------------------------------------------------------------------------------------- |
 | `autocompleteChanges` | `EventEmitter<string>` | Event will be emitted whenever the filter value changes. The user is responsible for filtering his data and providing the updated `options`. |
+
+## Css Classes
+
+`ngx-autocomplete-input`: The autocomplete text input.
+
+`ngx-autocomplete-container`: `<div />` with absolute position, holding the possible autocomplete options.
+
+`ngx-autocomplete-option`: A single option of the autocomplete dropdown.
 
 # Examples
 

@@ -10,7 +10,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 Navigate into `projects/bbortt/ngx-autocomplete` and [link](https://docs.npmjs.com/cli/v6/commands/npm-link) the package.
 
-Run `yarn build --watch` in the same directory to watch and build a bundle on file changes.
+Run `ng build --watch` in the root directory to watch and build a bundle on file changes.
 
 ## Build
 
