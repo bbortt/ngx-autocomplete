@@ -3,10 +3,11 @@
 > Angular V11 compatible autocomplete component to use with any style framework.
 
 [![Travis CI](https://travis-ci.com/bbortt/ngx-autocomplete.svg?branch=release)](https://travis-ci.com/bbortt/ngx-autocomplete)
-[![Blazing Fast](https://img.shields.io/badge/speed-blazing%20%F0%9F%94%A5-brightgreen.svg?style=flat-square)](https://twitter.com/acdlite/status/974390255393505280)
+[![npm Version](https://img.shields.io/npm/v/@bbortt/ngx-autocomplete)](https://www.npmjs.com/package/@bbortt/ngx-autocomplete)
+[![Blazing Fast](https://img.shields.io/badge/speed-blazing%20%F0%9F%94%A5-brightgreen.svg)](https://twitter.com/acdlite/status/974390255393505280)
 [![License: Apache 2](https://img.shields.io/badge/License-Apache2-blue.svg)](https://opensource.org/licenses/MIT)
 
-##_Highlights_:
+## _Highlights_:
 
 - Fully flexible for any autocomplete object through `propertyAccessor` function
 - Scales perfectly to every screen size, even when resizing
