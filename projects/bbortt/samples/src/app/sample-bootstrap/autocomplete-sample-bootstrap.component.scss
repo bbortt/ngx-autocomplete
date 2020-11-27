@@ -16,7 +16,7 @@
 
       @extend .form-control ;
 
-      &:hover {
+      &-active {
         @extend .bg-primary ;
         @extend .text-white ;
       }
