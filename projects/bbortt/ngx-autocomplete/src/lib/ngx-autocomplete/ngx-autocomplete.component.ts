@@ -1,5 +1,20 @@
-import { Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnInit,
+  Output,
+  QueryList,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormControl,
+  NG_VALUE_ACCESSOR
+} from '@angular/forms';
 
 import { debounceTime, startWith } from 'rxjs/operators';
 
@@ -49,7 +64,7 @@ export class NgxAutocompleteComponent<T>
   // Accessibility, keyboard navigation
   optionIndex = -1;
   @ViewChildren('autocompleteOption')
-  autocompleteOptions?: QueryList<ElementRef<HTMLInputElement>>;
+  autocompleteOptions?: QueryList<ElementRef<HTMLDivElement>>;
 
   // Component-internal FormControl
   formValue: T;
@@ -58,10 +73,8 @@ export class NgxAutocompleteComponent<T>
   autocompleteControl = new FormControl('');
 
   // Implementation of ControlValueAccessor functionality
-  private onChange = (update: T) => {
-  }
-  onTouched = () => {
-  }
+  private onChange = (update: T) => {};
+  onTouched = () => {};
 
   ngOnInit(): void {
     this.autocompleteControl.valueChanges
@@ -95,13 +108,14 @@ export class NgxAutocompleteComponent<T>
   }
 
   valueChanges(value: string): void {
+    this.optionIndex = -1;
+
     if (this.isFocused && !value) {
       this.emitValueChange(null);
-    } else if (!this.isFocused && !!value) {
-      this.onFocusIn();
+    } else if (!!value) {
+      this.onFocusIn(true);
     }
 
-    this.optionIndex = -1;
     this.autocompleteChanges.next(value);
   }
 
@@ -114,35 +128,63 @@ export class NgxAutocompleteComponent<T>
     this.autocompleteInputWidth = this.autocompleteInput!.nativeElement.offsetWidth;
   }
 
-  onFocusIn(clearSelection = false): void {
+  onWindowClick($event: MouseEvent): void {
+    if (
+      !(
+        $event.target instanceof HTMLInputElement &&
+        this.autocompleteInput.nativeElement ===
+          ($event.target as HTMLInputElement)
+      ) &&
+      !(
+        $event.target instanceof HTMLDivElement &&
+        this.autocompleteOptions
+          .toArray()
+          .map(
+            (autocompleteOption: ElementRef<HTMLDivElement>) =>
+              autocompleteOption.nativeElement
+          )
+          .includes($event.target as HTMLDivElement)
+      )
+    ) {
+      this.onFocusOut(true);
+    }
+  }
+
+  onFocusIn(force = false): void {
     if (!this.isFocused) {
       this.onTouched();
     }
 
-    if (clearSelection) {
+    if (force) {
       this.optionIndex = -1;
+      this.isFocused = true;
     }
-
     // Prevent focus when reaching input via `escape`
-    if (this.preventEscapeFocus) {
-      this.preventEscapeFocus = !this.preventEscapeFocus;
-    } else {
+    else if (!this.preventEscapeFocus) {
       this.isFocused = true;
     }
 
+    this.preventEscapeFocus = false;
     this.onWindowResize();
   }
 
   onFocusOut(force = false): void {
     if (this.optionIndex < 0 || force) {
       this.isFocused = false;
-      this.preventEscapeFocus = force;
-      this.autocompleteInput!.nativeElement.focus({ preventScroll: true });
+
+      if (force) {
+        this.preventEscapeFocus = true;
+      } else {
+        this.autocompleteInput!.nativeElement.focus({ preventScroll: true });
+      }
     }
   }
 
   isAutocompleted(): boolean {
-    return this.autocompleteControl.value === this.optionPropertyAccessor(this.formValue);
+    return (
+      this.autocompleteControl.value ===
+      this.optionPropertyAccessor(this.formValue)
+    );
   }
 
   selectOption(option: T): void {
@@ -193,6 +235,8 @@ export class NgxAutocompleteComponent<T>
   }
 
   indexChange(): void {
-    this.autocompleteOptions!.toArray()[this.optionIndex].nativeElement.focus({ preventScroll: true });
+    this.autocompleteOptions!.toArray()[this.optionIndex].nativeElement.focus({
+      preventScroll: true
+    });
   }
 }
