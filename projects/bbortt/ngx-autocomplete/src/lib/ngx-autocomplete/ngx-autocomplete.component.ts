@@ -59,9 +59,9 @@ export class NgxAutocompleteComponent<T>
 
   // Implementation of ControlValueAccessor functionality
   private onChange = (update: T) => {
-  };
+  }
   onTouched = () => {
-  };
+  }
 
   ngOnInit(): void {
     this.autocompleteControl.valueChanges
