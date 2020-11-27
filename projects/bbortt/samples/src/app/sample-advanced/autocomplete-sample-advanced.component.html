@@ -1,6 +1,11 @@
 <form name="editForm" role="form" novalidate [formGroup]="editForm">
   <div>
-    <label for="field-country"> Name </label>
+    <label for="field-name"> Name </label>
+    <input name="name" id="field-name" formControlName="name" />
+  </div>
+
+  <div>
+    <label for="field-country"> Country </label>
 
     <ngx-autocomplete
       name="country"

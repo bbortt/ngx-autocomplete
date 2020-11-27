@@ -222,14 +222,17 @@ export class NgxAutocompleteComponent<T>
    * @param force may force-close the options
    */
   onFocusOut(force = false): void {
-    if (this.optionIndex < 0 || force) {
-      this.isFocused = false;
+    this.isFocused = false;
 
+    if (this.optionIndex < 0 || force) {
       if (force) {
         this.preventEscapeFocus = true;
       } else {
         this.autocompleteInput!.nativeElement.focus({ preventScroll: true });
       }
+    } else {
+      this.preventEscapeFocus = true;
+      this.autocompleteInput!.nativeElement.focus({ preventScroll: true });
     }
   }
 

@@ -11,6 +11,7 @@ import { ALL_COUNTRIES } from '../countries.const';
 })
 export class AutocompleteSampleBootstrapComponent implements OnInit {
   editForm = this.fb.group({
+    name: [],
     country: ['', Validators.required]
   });
 

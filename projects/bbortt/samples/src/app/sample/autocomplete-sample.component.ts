@@ -9,6 +9,7 @@ import { ALL_COUNTRIES } from '../countries.const';
 })
 export class AutocompleteSampleComponent implements OnInit {
   editForm = this.fb.group({
+    name: [],
     country: ['', Validators.required]
   });
 
