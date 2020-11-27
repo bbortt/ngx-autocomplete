@@ -168,10 +168,11 @@ export class NgxAutocompleteComponent<T>
   /**
    * Listener for window click events. Is required to detect out-of-autocomplete clicks.
    *
-   * @param $event the `MouseEvent` which happened anywhere on the window
+   * @param $event the `MouseEvent` which happened anywhere in the window
    */
   onWindowClick($event: MouseEvent): void {
     if (
+      this.isFocused &&
       !(
         $event.target instanceof HTMLInputElement &&
         this.autocompleteInput.nativeElement ===
@@ -189,6 +190,22 @@ export class NgxAutocompleteComponent<T>
       )
     ) {
       this.onFocusOut(true);
+    }
+  }
+
+  /**
+   * Listener for window tab events. Is required to detect out-of-autocomplete clicks.
+   *
+   * @param $event the `KeyboardEvent` which happened anywhere in the window
+   */
+  onWindowTab($event: KeyboardEvent): void {
+    if (
+      $event.key === 'Tab' &&
+      $event.target instanceof HTMLInputElement &&
+      this.autocompleteInput.nativeElement ===
+        ($event.target as HTMLInputElement)
+    ) {
+      this.onFocusOut();
     }
   }
 
