@@ -5,8 +5,13 @@
   novalidate
   [formGroup]="editForm"
 >
-  <div class="form-group">
-    <label for="field-country"> Name </label>
+  <div>
+    <label for="field-name"> Name </label>
+    <input name="name" id="field-name" formControlName="name" />
+  </div>
+
+  <div>
+    <label for="field-country"> Country </label>
 
     <ngx-autocomplete
       name="country"

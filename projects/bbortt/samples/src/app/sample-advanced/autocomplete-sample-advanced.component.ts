@@ -13,6 +13,7 @@ type Country = {
 })
 export class AutocompleteSampleAdvancedComponent {
   editForm = this.fb.group({
+    name: [],
     country: [null, Validators.required]
   });
 
