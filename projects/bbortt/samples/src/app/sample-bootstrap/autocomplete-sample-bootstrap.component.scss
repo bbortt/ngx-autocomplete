@@ -1,10 +1,10 @@
 #autocomplete-sample-bootstrap {
   // oh, by the way:
   // this is not how you install Bootstrap into an Angular project!
-  @import "../../../../../../node_modules/bootstrap/scss/bootstrap";
+  @import "~node_modules/bootstrap/scss/bootstrap";
 
   .ngx-autocomplete-input {
-    @extend .form-control !optional;
+    @extend .form-control ;
   }
 
   .ngx-autocomplete-container {
@@ -14,11 +14,11 @@
     .ngx-autocomplete-option {
       border-radius: 0;
 
-      @extend .form-control !optional;
+      @extend .form-control ;
 
       &:hover {
-        @extend .bg-primary !optional;
-        @extend .text-white !optional;
+        @extend .bg-primary ;
+        @extend .text-white ;
       }
     }
   }

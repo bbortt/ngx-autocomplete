@@ -22,8 +22,9 @@
     "test:watch": "ng test --browsers=ChromeHeadless",
     "lint": "ng lint",
     "lint:fix": "npm run lint -- --fix",
-    "deploy": "npm publish dist/bbortt/ngx-autocomplete",
-    "deploy:pages": "ng deploy @bbortt/samples"
+    "prepublishOnly": "npm run build",
+    "publish": "npm publish dist/bbortt/ngx-autocomplete",
+    "publish:pages": "ng deploy @bbortt/samples"
   },
   "private": true,
   "dependencies": {
