@@ -76,6 +76,9 @@ export class NgxAutocompleteComponent<T>
   private onChange = (update: T) => {};
   onTouched = () => {};
 
+  /**
+   * Bind to autocomplete input changes. Emits `valueChanges` of parent `FormControl` using `this.onChange`.
+   */
   ngOnInit(): void {
     this.autocompleteControl.valueChanges
       .pipe(
@@ -85,14 +88,29 @@ export class NgxAutocompleteComponent<T>
       .subscribe((value: string) => this.valueChanges(value));
   }
 
+  /**
+   * Register `onChange` listener of parent `FormControl`.
+   *
+   * @param onChange the `onChange` callback
+   */
   registerOnChange(onChange: (update: T) => void): void {
     this.onChange = onChange;
   }
 
+  /**
+   * Register `onTouched` listener of parent `FormControl`.
+   *
+   * @param onTouched the `onTouched` callback
+   */
   registerOnTouched(onTouched: any): void {
     this.onTouched = onTouched;
   }
 
+  /**
+   * Controls autocomplete `<input /> enabled/disabled state from parent `FormControl`.
+   *
+   * @param isDisabled if the autocomplete shall be disabled
+   */
   setDisabledState(isDisabled: boolean): void {
     if (isDisabled) {
       this.autocompleteControl.disable();
@@ -101,12 +119,23 @@ export class NgxAutocompleteComponent<T>
     }
   }
 
+  /**
+   * Update initial autocomplete (`string`) value. Does only trigger if a value is present.
+   *
+   * @param object the initial parent `FormControl` value
+   */
   writeValue(object: T): void {
     if (object) {
       this.autocompleteControl.setValue(this.optionPropertyAccessor(object));
     }
   }
 
+  /**
+   * Handles autocomplete `<input />` value changes. Manages focus state and does emit the `@Output()` event if
+   * appropriate (via `this.emitValueChange`).
+   *
+   * @param value the (possibly) new search/autocomplete value
+   */
   valueChanges(value: string): void {
     this.optionIndex = -1;
 
@@ -119,15 +148,28 @@ export class NgxAutocompleteComponent<T>
     this.autocompleteChanges.next(value);
   }
 
+  /**
+   * Actually updates the parent `FormControl` value via `@Output EventEmitter`.
+   *
+   * @param value the new value
+   */
   emitValueChange(value: T): void {
     this.formValue = value;
     this.onChange(value);
   }
 
+  /**
+   * Listener for window resize events. Does adapt the autocomplete options/dropdown size.
+   */
   onWindowResize(): void {
     this.autocompleteInputWidth = this.autocompleteInput!.nativeElement.offsetWidth;
   }
 
+  /**
+   * Listener for window click events. Is required to detect out-of-autocomplete clicks.
+   *
+   * @param $event the `MouseEvent` which happened anywhere on the window
+   */
   onWindowClick($event: MouseEvent): void {
     if (
       !(
@@ -150,6 +192,12 @@ export class NgxAutocompleteComponent<T>
     }
   }
 
+  /**
+   * Handles focus in events. May not necessarily expand all options, e.g. if the focus was changed from options to
+   * `<input />` via escape key (`this.preventEscapeFocus`).
+   *
+   * @param force whether to force-expand all options
+   */
   onFocusIn(force = false): void {
     if (!this.isFocused) {
       this.onTouched();
@@ -168,6 +216,11 @@ export class NgxAutocompleteComponent<T>
     this.onWindowResize();
   }
 
+  /**
+   * Handles focus out events. Does update `this.isFocused` state based on selected option.
+   *
+   * @param force may force-close the options
+   */
   onFocusOut(force = false): void {
     if (this.optionIndex < 0 || force) {
       this.isFocused = false;
@@ -180,6 +233,9 @@ export class NgxAutocompleteComponent<T>
     }
   }
 
+  /**
+   * Detects whether the autocomplete `<input />` value does match the current parent `FormControl` value.
+   */
   isAutocompleted(): boolean {
     return (
       this.autocompleteControl.value ===
@@ -187,12 +243,22 @@ export class NgxAutocompleteComponent<T>
     );
   }
 
+  /**
+   * Selects the given option from the dropdown.
+   *
+   * @param option the option to pick
+   */
   selectOption(option: T): void {
     this.emitValueChange(option);
     this.autocompleteControl.setValue(this.optionPropertyAccessor(option));
     this.isFocused = false;
   }
 
+  /**
+   * Returns complex objects as `string`. Does access complex parent `FormControl` values. Respects `null`, `string` and `T` values.
+   *
+   * @param option the current option to access as string
+   */
   optionPropertyAccessor(option: T): string {
     if (option && this.propertyAccessor) {
       if (typeof this.placeholder === 'string') {
@@ -207,6 +273,9 @@ export class NgxAutocompleteComponent<T>
     return (option as any) as string;
   }
 
+  /**
+   * Increase current option index by 1. Must also respect `this.navigateInfinite`.
+   */
   nextIndex(): void {
     if (this.optionIndex < this.options.length - 1) {
       this.optionIndex++;
@@ -217,6 +286,9 @@ export class NgxAutocompleteComponent<T>
     this.indexChange();
   }
 
+  /**
+   * Decrease current option index by 1. Must also respect `this.navigateInfinite`.
+   */
   previousIndex(): void {
     if (this.optionIndex < 0) {
       this.onFocusOut();
@@ -229,11 +301,19 @@ export class NgxAutocompleteComponent<T>
     this.indexChange();
   }
 
+  /**
+   * Force-sets the current active option index. Mainly used for `MouseEvent`s.
+   *
+   * @param index the index to update the selection to
+   */
   activeIndex(index: number): void {
     this.optionIndex = index;
     this.indexChange();
   }
 
+  /**
+   * Handles index changes, does update form focus and indirectly also sets the active class.
+   */
   indexChange(): void {
     this.autocompleteOptions!.toArray()[this.optionIndex].nativeElement.focus({
       preventScroll: true
