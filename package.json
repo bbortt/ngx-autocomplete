@@ -6,6 +6,7 @@
     "name": "Timon Borter",
     "url": "https://bbortt.github.io"
   },
+  "homepage": "https://bbortt.github.io/ngx-autocomplete",
   "repository": {
     "type": "git",
     "url": "https://github.com/bbortt/ngx-autocomplete.git"
