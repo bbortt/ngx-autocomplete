@@ -216,10 +216,6 @@ export class NgxAutocompleteComponent<T>
    * @param force whether to force-expand all options
    */
   onFocusIn(force = false): void {
-    if (!this.isFocused) {
-      this.onTouched();
-    }
-
     if (force) {
       this.optionIndex = -1;
       this.isFocused = true;
@@ -239,6 +235,7 @@ export class NgxAutocompleteComponent<T>
    * @param force may force-close the options
    */
   onFocusOut(force = false): void {
+    this.onTouched();
     this.isFocused = false;
 
     if (this.optionIndex < 0 || force) {
