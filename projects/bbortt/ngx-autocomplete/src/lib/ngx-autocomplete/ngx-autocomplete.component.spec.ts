@@ -14,7 +14,9 @@ describe('NgxAutocompleteComponent', () => {
     });
 
     beforeEach(() => {
-      fixture = TestBed.createComponent<NgxAutocompleteComponent<string>>(NgxAutocompleteComponent) ;
+      fixture = TestBed.createComponent<NgxAutocompleteComponent<string>>(
+        NgxAutocompleteComponent
+      );
       component = fixture.componentInstance;
       fixture.detectChanges();
     });

@@ -4,6 +4,7 @@ import {
   EventEmitter,
   forwardRef,
   Input,
+  OnDestroy,
   OnInit,
   Output,
   QueryList,
@@ -16,7 +17,8 @@ import {
   NG_VALUE_ACCESSOR
 } from '@angular/forms';
 
-import { debounceTime, startWith } from 'rxjs/operators';
+import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'ngx-autocomplete',
@@ -31,7 +33,7 @@ import { debounceTime, startWith } from 'rxjs/operators';
   ]
 })
 export class NgxAutocompleteComponent<T>
-  implements ControlValueAccessor, OnInit {
+  implements ControlValueAccessor, OnDestroy, OnInit {
   // Control values for ElementRef<HtmlInputElement>
   @Input()
   inputId?: string;
@@ -40,6 +42,10 @@ export class NgxAutocompleteComponent<T>
   @Input()
   placeholder = 'Search';
 
+  // Advanced configuration
+  @Input()
+  private debounceTime = 0;
+
   // Autocompleting tools, options and propertyAccessor for complex objects
   @Input()
   options: T[] = [];
@@ -47,10 +53,6 @@ export class NgxAutocompleteComponent<T>
   propertyAccessor?: string | ((option: T) => string);
   @Input()
   navigateInfinite = false;
-
-  // Advanced configuration
-  @Input()
-  private debounceTime = 0;
 
   // Autocomplete, filter value change event
   @Output()
@@ -71,9 +73,8 @@ export class NgxAutocompleteComponent<T>
   isFocused = false;
   preventEscapeFocus = false;
   autocompleteControl = new FormControl('');
+  unsubscribe = new Subject();
 
-  // Implementation of ControlValueAccessor functionality
-  private onChange = (update: T) => {};
   onTouched = () => {};
 
   /**
@@ -83,9 +84,18 @@ export class NgxAutocompleteComponent<T>
     this.autocompleteControl.valueChanges
       .pipe(
         startWith(this.autocompleteControl.value as string),
-        debounceTime(this.debounceTime)
+        debounceTime(this.debounceTime),
+        takeUntil(this.unsubscribe)
       )
       .subscribe((value: string) => this.valueChanges(value));
+  }
+
+  /**
+   * Unbind `valueChanges` from internal form control.
+   */
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
   /**
@@ -336,4 +346,7 @@ export class NgxAutocompleteComponent<T>
       preventScroll: true
     });
   }
+
+  // Implementation of ControlValueAccessor functionality
+  private onChange = (update: T) => {};
 }
