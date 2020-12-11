@@ -1,41 +1,41 @@
 <div
-  class="ngx-autocomplete"
-  (window:resize)="onWindowResize()"
   (window:click)="onWindowClick($event)"
   (window:keydown)="onWindowTab($event)"
+  (window:resize)="onWindowResize()"
+  class="ngx-autocomplete"
 >
   <input
     #autocompleteInput
-    type="text"
-    name="{{ inputName ? inputName : '' }}"
-    id="{{ inputId ? inputId : '' }}"
-    class="ngx-autocomplete-input"
     (click)="onFocusIn(true)"
     (focusin)="onFocusIn()"
-    (keyup.escape)="onFocusOut()"
     (keydown.arrowDown)="activeIndex(0)"
-    [placeholder]="placeholder"
+    (keyup.escape)="onFocusOut()"
     [formControl]="autocompleteControl"
+    [placeholder]="placeholder"
     autocomplete="off"
+    class="ngx-autocomplete-input"
+    id="{{ inputId ? inputId : '' }}"
+    name="{{ inputName ? inputName : '' }}"
+    type="text"
   />
   <div
-    class="ngx-autocomplete-container"
     [hidden]="isAutocompleted() || !isFocused"
+    class="ngx-autocomplete-container"
   >
     <div
       #autocompleteOption
-      *ngFor="let option of options; let i = index"
-      class="ngx-autocomplete-option"
-      [tabIndex]="optionIndex === i ? 0 : -1"
-      [class.ngx-autocomplete-option-active]="optionIndex === i"
-      [style.width.px]="autocompleteInputWidth"
-      (keyup.escape)="onFocusOut()"
-      (mouseenter)="activeIndex(i)"
+      (click)="selectOption(option)"
       (keydown.arrowDown)="nextIndex()"
       (keydown.arrowUp)="previousIndex()"
-      (click)="selectOption(option)"
       (keyup.enter)="selectOption(option)"
+      (keyup.escape)="onFocusOut()"
+      (mouseenter)="activeIndex(i)"
+      *ngFor="let option of options; let i = index"
+      [class.ngx-autocomplete-option-active]="optionIndex === i"
+      [style.width.px]="autocompleteInputWidth"
+      [tabIndex]="optionIndex === i ? 0 : -1"
       autofocus
+      class="ngx-autocomplete-option"
     >
       {{ optionPropertyAccessor(option) }}
     </div>
